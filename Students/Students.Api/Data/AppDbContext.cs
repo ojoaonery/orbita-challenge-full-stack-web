@@ -14,7 +14,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configurações de modelo
         modelBuilder.Entity<Student>()
             .HasIndex(s => s.Ra)
             .IsUnique();
