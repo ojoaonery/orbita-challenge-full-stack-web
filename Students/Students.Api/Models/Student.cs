@@ -13,7 +13,7 @@ public class Student
 
     [Required(ErrorMessage = "O nome é obrigatório.")]
     [StringLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres.")]
-    public string Nome { get; set; }
+    public string Name { get; set; }
 
     [Required(ErrorMessage = "O email é obrigatório.")]
     [EmailAddress(ErrorMessage = "O email deve ser válido.")]
@@ -23,10 +23,10 @@ public class Student
     [StringLength(11, ErrorMessage = "O CPF deve ter 11 caracteres.")]
     public string Cpf { get; private set; }
 
-    public Student (string ra, string nome, string email, string cpf)
+    public Student (string ra, string name, string email, string cpf)
     {
         Ra = ra;
-        Nome = nome;
+        Name = name;
         Email = email;
         Cpf = cpf;
     }   

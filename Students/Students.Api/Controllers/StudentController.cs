@@ -63,7 +63,7 @@ public class StudentController : ControllerBase
             return NotFound();
         }
 
-        student.Nome = updatedStudent.Nome;
+        student.Name = updatedStudent.Name;
         student.Email = updatedStudent.Email;
 
         _context.Entry(student).State = EntityState.Modified;
