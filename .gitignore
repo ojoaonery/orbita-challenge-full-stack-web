@@ -107,5 +107,5 @@ dist
 .tern-port
 
 # .NET directories
-Students/Students.Api/bin
-Students/Students.Api/obj
+bin/
+obj/
