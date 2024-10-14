@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    container_name: orbita-challenge
+    environment:
+      POSTGRES_DB: orbita-challenge
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"  
+    volumes:
+      - orbita-challenge:/var/lib/postgresql/data
+
+volumes:
+  orbita-challenge:
+    name: orbita-challenge
