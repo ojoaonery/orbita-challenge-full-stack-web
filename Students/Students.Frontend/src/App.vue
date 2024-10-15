@@ -3,10 +3,8 @@
     <v-navigation-drawer location="left" permanent app>
       <Sidebar />
     </v-navigation-drawer>
-    <v-main class="d-flex justify-center align-center">
-      <v-container class="spacing-playground pa-6">
+    <v-main>
         <router-view />
-      </v-container>
     </v-main>
   </v-app>
 </template>

@@ -32,6 +32,6 @@
   import { ref } from "vue";
 
   const items = ref([
-    { title: "Alunos", icon: "mdi-account-multiple", path: "/" },
+    { title: "Alunos", icon: "mdi-account-multiple", path: "/Students" },
   ]);
 </script>
