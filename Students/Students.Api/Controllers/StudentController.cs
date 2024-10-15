@@ -84,6 +84,6 @@ public class StudentController : ControllerBase
 
     private bool StudentExists(int id)
     {
-        return _context.Students.Any(e => e.Id == id);
+        return _context.Students.Any(s => s.Id == id);
     }
 }
