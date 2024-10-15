@@ -16,6 +16,14 @@ public class StudentController : ControllerBase
         _context = context;
     }
 
+    [HttpPost]
+    public async Task<IActionResult> CreateStudent(Student student)
+    {
+        await _context.Students.AddAsync(student);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
@@ -26,45 +34,20 @@ public class StudentController : ControllerBase
     public async Task<ActionResult<Student>> GetStudent(int id)
     {
         var student = await _context.Students.FindAsync(id);
-        
         if (student == null)
         {
             return NotFound();
         }
-
         return student;
     }
 
-    [HttpPost]
-    public async Task<ActionResult<Student>> CreateStudent(Student student)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        _context.Students.Add(student);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
-    }
-
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateStudent(int id, Student updatedStudent)
+    public async Task<IActionResult> UpdateStudent(int id, Student student)
     {
-        if (id != updatedStudent.Id)
+        if (id != student.Id)
         {
-            return BadRequest("O ID no corpo da requisição não corresponde ao ID da URL.");
+            return BadRequest();
         }
-
-        var student = await _context.Students.FindAsync(id);
-        if (student == null)
-        {
-            return NotFound();
-        }
-
-        student.Name = updatedStudent.Name;
-        student.Email = updatedStudent.Email;
 
         _context.Entry(student).State = EntityState.Modified;
 
@@ -74,14 +57,11 @@ public class StudentController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!_context.Students.Any(e => e.Id == id))
+            if (!StudentExists(id))
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+            throw;
         }
 
         return NoContent();
@@ -100,5 +80,10 @@ public class StudentController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    private bool StudentExists(int id)
+    {
+        return _context.Students.Any(e => e.Id == id);
     }
 }

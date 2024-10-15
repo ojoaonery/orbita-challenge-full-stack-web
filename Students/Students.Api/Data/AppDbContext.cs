@@ -14,9 +14,34 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Student>()
-            .HasIndex(s => s.Ra)
-            .IsUnique();
+        #region Student modelBuilder
+        modelBuilder.Entity<Student>(student => {
+            student
+                .HasKey(s => s.Id);
+
+            student
+                .Property(s => s.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            student
+                .Property(s => s.Email)
+                .IsRequired()
+                .HasMaxLength(100);    
+
+            student
+                .HasIndex(s => s.Ra)
+                .IsUnique();
+            
+            student
+                .Property(s => s.Ra)
+                .IsRequired();
+
+            student
+                .Property(s => s.Cpf)
+                .IsRequired();    
+        });
+        #endregion
 
         base.OnModelCreating(modelBuilder);
     }
