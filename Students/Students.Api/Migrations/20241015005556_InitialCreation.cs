@@ -15,10 +15,10 @@ namespace Students.Api.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Ra = table.Column<string>(type: "text", nullable: false),
-                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Cpf = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Ra = table.Column<int>(type: "integer", nullable: false),
+                    Cpf = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

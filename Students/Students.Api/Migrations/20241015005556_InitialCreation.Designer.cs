@@ -11,8 +11,8 @@ using Students.Api.Data;
 namespace Students.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241014182256_UpdateStudentModel")]
-    partial class UpdateStudentModel
+    [Migration("20241015005556_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,21 +33,20 @@ namespace Students.Api.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<string>("Ra")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Ra")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

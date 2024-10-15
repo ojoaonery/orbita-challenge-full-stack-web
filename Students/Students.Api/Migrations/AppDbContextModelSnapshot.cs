@@ -31,21 +31,20 @@ namespace Students.Api.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<string>("Ra")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Ra")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
