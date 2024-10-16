@@ -3,7 +3,9 @@
     <v-container fluid>
       <v-row align="center" no-gutters>
         <v-col cols="auto" class="d-flex align-center">
-          <v-img contain src="../assets/logo.svg" height="80" width="100"></v-img>
+          <router-link :to="{ name: '/' }">
+            <v-img contain src="../assets/logo.svg" height="80" width="100"></v-img>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>

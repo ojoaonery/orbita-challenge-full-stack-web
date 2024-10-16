@@ -12,6 +12,7 @@
             variant="outlined"
             :rules="[v => !!v || 'Nome é obrigatório']"
             required
+            class="mb-4"
           ></v-text-field>
 
           <v-text-field
@@ -20,6 +21,7 @@
             variant="outlined"
             :rules="[v => !!v || 'E-mail é obrigatório', v => /.+@.+\..+/.test(v) || 'E-mail deve ser válido']"
             required
+            class="mb-4"
           ></v-text-field>
 
           <v-text-field
@@ -30,6 +32,7 @@
             required
             type="number"
             :disabled="isEdit"
+            class="mb-4"
           ></v-text-field>
 
           <v-text-field
@@ -39,9 +42,10 @@
             :rules="[v => !!v || 'CPF é obrigatório']"
             required
             :disabled="isEdit"
+            class="mb-4"
           ></v-text-field>
 
-          <div class="d-flex justify-end mt-4">
+          <div class="d-flex justify-end">
             <v-btn variant="flat" @click="cancel">Cancelar</v-btn>
             <v-btn variant="tonal" @click="saveStudent" :disabled="!isValid" class="ml-5">Salvar</v-btn>
           </div>

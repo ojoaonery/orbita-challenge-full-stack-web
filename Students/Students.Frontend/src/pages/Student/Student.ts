@@ -8,6 +8,10 @@ interface VForm {
 }
 
 export default defineComponent({
+  beforeRouteEnter(to, from, next) {
+    document.title = 'Cadastro de aluno';
+    next();
+  },
   setup() {
     const router = useRouter();
     const route = useRoute();

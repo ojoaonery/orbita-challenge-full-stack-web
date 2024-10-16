@@ -2,11 +2,15 @@ import { computed, defineComponent, onMounted, ref } from 'vue';
 import { IStudent, StudentService } from '@/services/data/';
 
 export default defineComponent({
+  beforeRouteEnter(to, from, next) {
+    document.title = 'Consulta de alunos';
+    next();
+  },
   setup() {
     const students = ref<IStudent[]>([]);
-    const dialogDelete = ref(false);
+    const isDelete = ref(false);
     const searchText = ref('');
-    const deleteId = ref('0');
+    const deleteId = ref(0);
     const path = "/Student"
 
     const headers = [
@@ -16,13 +20,15 @@ export default defineComponent({
       { title: 'Ações', key: 'actions', sortable: false },
     ];
 
-    onMounted(() => {
+    const loadStudents = () => {
       StudentService.getAll().then((response) => {
         students.value = response.data;
       });
-    });
+    };
 
-    const allStudents = computed(() => {
+    onMounted(loadStudents);
+
+    const filterStudents = computed(() => {
       return students.value.filter((student) => {
         return (
           String(student.ra).toLowerCase().includes(searchText.value.toLowerCase()) ||
@@ -32,30 +38,30 @@ export default defineComponent({
       });
     });
 
-    const edit = (id: string) => {
-    };
-
-    const deleting = (id: string) => {
+    const deleteStudent = (id: number) => {
       deleteId.value = id;
-      dialogDelete.value = true;
+      isDelete.value = true;
     };
 
-    const deleteItemConfirm = () => {
-      dialogDelete.value = false;
-      StudentService.delete(Number(deleteId.value));
+    const deleteStudentConfirm = () => {
+      isDelete.value = false;
+      StudentService.delete(deleteId.value).then(() => {
+        loadStudents();
+      }).catch((error) => {
+        console.error("Erro ao excluir o estudante:", error);
+      });
     };
 
     return {
       students,
-      dialogDelete,
+      isDelete,
       searchText,
       deleteId,
       path,
       headers,
-      allStudents,
-      edit,
-      deleting,
-      deleteItemConfirm,
+      filterStudents,
+      deleteStudent,
+      deleteStudentConfirm,
     };
   }
 });

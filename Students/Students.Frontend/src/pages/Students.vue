@@ -23,7 +23,7 @@
       <v-divider></v-divider>
       <v-data-table
         :headers="headers"
-        :items="allStudents"
+        :items="filterStudents"
         :search="searchText"
       >
         <template v-slot:item.actions="{ item: { id } }">
@@ -41,13 +41,12 @@
               icon="mdi-delete"
               variant="outlined"
               size="small"
-              @click="deleting(String(id))"
+              @click="deleteStudent(Number(id))"
             />
           </div>
         </template>
       </v-data-table>
-      <v-dialog v-model="dialogDelete" max-width="500">
-      <template v-slot:default="{ isActive }">
+      <v-dialog v-model="isDelete" max-width="500">
         <v-card title="Confirmar exclusão">
           <v-card-text>
             Você deseja excluir este aluno?
@@ -56,17 +55,16 @@
             <v-spacer></v-spacer>
             <v-btn
               text="Cancelar"
-              @click="isActive.value = false"
+              @click="isDelete = false; deleteId = 0;"
             />
             <v-btn
               text="Confirmar"
               variant="flat"
               color="red-lighten-1"
-              @click="isActive.value = false"
+              @click="deleteStudentConfirm()"
             />
           </v-card-actions>
         </v-card>
-      </template>
     </v-dialog>
     </v-container>
   </v-container>
